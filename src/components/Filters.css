@@ -1,0 +1,87 @@
+.filters {
+  width: 250px;
+  padding: 1rem;
+  background: white;
+  border-right: 1px solid #eee;
+}
+
+.filters {
+  transition: opacity 0.3s;
+  opacity: 1;
+}
+
+.filters.visible {
+  opacity: 1;
+}
+
+.filters.hidden {
+  opacity: 0;
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.filters-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.clear-all {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.filter-group {
+  margin-bottom: 2rem;
+}
+
+.filter-group h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.filter-options input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+.price-slider {
+  padding: 0 0.5rem;
+}
+
+.price-range {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+}

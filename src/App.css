@@ -1,38 +1,75 @@
-.App {
-  text-align: center;
+/* Simple App.css - minimal styles for Product Listing Page */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+
+
+
+/* Basic reset and page container */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fafafa;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+.site-container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; width: 100%; }
+
+/* Header placeholder styles (component-level file should override specifics) */
+.header { background: #fff; border-bottom: 1px solid #eee; }
+.header .header-content { max-width: 1200px; margin: 0 auto; padding: 1rem; display:flex; align-items:center; justify-content:space-between; }
+
+/* Main layout: filters + products */
+.main-content { display:flex; gap:1.5rem; padding:1.5rem 0; width:100%; }
+.filters { width: 240px; }
+.product-area { flex:1; }
+
+.products-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; gap:1rem; }
+.products-count { color:#666; }
+
+/* Product card baseline styling (component CSS may add more) */
+.product-card { background:#fff; border-radius:8px; border:1px solid #eee; overflow:hidden; display:flex; flex-direction:column; }
+.product-card img { width:100%; height:200px; object-fit:cover; display:block; }
+.product-details { padding:0.75rem; }
+.product-title { font-size:0.98rem; margin-bottom:0.35rem; }
+.product-price { font-weight:600; color:#111; }
+
+/* Footer baseline */
+.footer { background:#000000; padding:2rem 0; margin-top:auto; }
+
+/* Loading / error */
+.loading, .error { text-align:center; padding:1.5rem; }
+
+/* Small utilities */
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* Additional responsive helpers - will not override existing product-grid breakpoints */
+@media (max-width: 1100px) {
+  .filters { width:200px; }
+}
+@media (max-width: 768px) {
+  .main-content { flex-direction:column; }
+  .filters { width:100%; }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* End added styles */
+/* Simple App.css - minimal styles for Product Listing Page */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* Desktop: 3 columns */
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);  /* Tablet: 2 columns */
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;  /* Mobile: 1 column */
   }
 }
