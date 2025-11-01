@@ -17,28 +17,51 @@ function App() {
   const [rightfilters,setRightfilters] = useState('newest')
   const [searchInput, setSearchInput] = useState('');
 
+
   const search = (input) => {
     setSearchInput(input);
-    fetchProducts();
   };
 
-  useEffect(() => {
-    fetchProducts()
-  }, [searchInput]);
-
-  const fetchProducts = async () => {
+   useEffect(() => {
+    const fetchProducts = async () => {
     try {
-      const response = await fetch(`https://fakestoreapi.com/products?sort=${filters}&search=${searchInput}`);
+      const response = await fetch(`https://fakestoreapi.com/products?search=${searchInput}`);
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
-      const filteredProducts = data.filter(product => product.title.toLowerCase().includes(searchInput.toLowerCase()));
-      setProducts(filteredProducts);
+      let filtered = data.filter(product =>
+        product.title.toLowerCase().includes(searchInput.toLowerCase())
+      );
+
+  
+      if (filters.category.length > 0) {
+        filtered = filtered.filter(product =>
+          filters.category.includes(product.category)
+        );
+      }
+
+      
+      if (filters.idealFor.length > 0) {
+        filtered = filtered.filter(product =>
+          filters.idealFor.includes(product.gender || product.type || '')
+        );
+      }
+
+      
+      filtered = filtered.filter(product =>
+        product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]
+      );
+
+      setProducts(filtered);
       setLoading(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);
     }
-  };
+  }
+     fetchProducts();
+   }, [searchInput, filters]);
+
+  
 
 
   const handleFilterChange = (filterType, value, checked) => {
