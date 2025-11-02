@@ -25,7 +25,7 @@ function App() {
    useEffect(() => {
     const fetchProducts = async () => {
     try {
-      const response = await fetch(`https://fakestoreapi.com/products?search=${searchInput}`);
+      const response = await fetch(`https://fakestoreapi.com/products?sort=${filters}&search=${searchInput}`);
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
       let filtered = data.filter(product =>
